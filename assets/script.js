@@ -18,6 +18,8 @@ const slides = [
 ]
 const leftArrow = document.querySelector('.arrow_left');
 const rightArrow = document.querySelector('.arrow_right');
+const img = document.querySelector('.banner_img');
+const txt = document.querySelector('.banner_txt');
 
 let positionSlide = 0;
 
@@ -42,3 +44,22 @@ rightArrow.addEventListener('click', function() {
 	console.log('clique sue la fléche de droite');
 	updateDots()
 });
+
+for (let i =0; i > slides.length; i++) {
+	const newDots = document.createElement('div');
+	newDots.addEventListener('click', function() {
+		positionSlide = i;
+		img.src = slides[positionSlide].image;
+		txt.innerHTML = slides[positionSlide].tagLine;
+	});
+
+}
+function updateDots() {
+	for (let i =0; i < dot.length; i++) {
+		if (i === positionSlide) {
+			dot[i].classList.add('dot_selected');
+		} else {
+			dot[i].classList.remove('dot_selected')
+		}
+	}
+}
