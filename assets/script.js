@@ -1,6 +1,6 @@
 const slides = [
 	{
-		"image":"./assets/images/slideshow/slides1.jpg",
+		"image":"./assets/images/slideshow/slide1.jpg",
 		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
 	},
 	{
@@ -16,10 +16,12 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+
 const leftArrow = document.querySelector('.arrow_left');
 const rightArrow = document.querySelector('.arrow_right');
-const img = document.querySelector('.banner_img');
-const txt = document.querySelector('.banner_txt');
+const image = document.querySelector('.banner-img');
+const txt = document.querySelector('.banner-txt');
+const dots = document.querySelector('.dots');
 
 let positionSlide = 0;
 
@@ -28,38 +30,46 @@ leftArrow.addEventListener('click', function() {
 	if (positionSlide === -1) {
 		positionSlide = slides.length -1;
 	}
-	img.src = slides[positionSlide].image;
+	image.src = slides[positionSlide].image;
 	txt.innerHTML = slides[positionSlide].tagLine;
-	console.log('clique sue la fléche de gauche');
-	updateDots()
+	console.log('exécute le code');
+	updateDots();
 });
 
 rightArrow.addEventListener('click', function() {
 	positionSlide++;
 	if (positionSlide === slides.length) {
-		positionSlide =  0;
+		positionSlide = 0;
 	}
-	img.src = slides[positionSlide].image;
+	image.src = slides[positionSlide].image;
 	txt.innerHTML = slides[positionSlide].tagLine;
-	console.log('clique sue la fléche de droite');
-	updateDots()
+	console.log('exécute le code');
+	updateDots();
 });
 
-for (let i =0; i > slides.length; i++) {
-	const newDots = document.createElement('div');
-	newDots.addEventListener('click', function() {
+for (let i = 0; i < slides.length; i++) {
+	const newDot = document.createElement('div'); 
+	newDot.classList = 'dot';
+	dots.appendChild (newDot);
+	newDot.addEventListener('click', function() {
 		positionSlide = i;
 		img.src = slides[positionSlide].image;
 		txt.innerHTML = slides[positionSlide].tagLine;
+		updateDots();
 	});
 
 }
+
+let dot = document.querySelectorAll('.dot');
+dot[0].classList.add('dot_selected');
+
 function updateDots() {
-	for (let i =0; i < dot.length; i++) {
+	for (let i = 0; i < dot.length; i++) {
 		if (i === positionSlide) {
 			dot[i].classList.add('dot_selected');
 		} else {
-			dot[i].classList.remove('dot_selected')
+			dot[i].classList.remove('dot_selected');
 		}
 	}
 }
+
